@@ -1,20 +1,33 @@
 class Storage {
     constructor(name, size) {
         this.name = name;
-        this.size = size;
-        this.used = 0;
+        this._size = size;
+        this._used = 0;
+        this._history = [];
     }
 
-    enter() {
-        if (this.used < this.size) {
-            this.used++;
+    enter(waiting) {
+        if (!waiting) {
+            this._history.push(this._used);
+        }
+        if (this._used < this._size) {
+            this._used++;
             return true;
         }
         return false;
     }
 
     leave() {
-        this.used--;
+        this._used--;
+    }
+
+    printResult(time) {
+        const avgUsed = this._history.reduce((sum, usedNum) => {
+            sum += usedNum;
+            return sum;
+        }, 0) / this._history.length;
+
+        console.log(`Storage: ${this.name}, average idle time: ${(1 - avgUsed / this._size) * time}`);
     }
 }
 

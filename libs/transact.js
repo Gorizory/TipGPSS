@@ -1,9 +1,10 @@
 class Transact {
-    constructor(id, startBlock, startTime) {
+    constructor(id, startTime) {
         this.id = id;
         this.currBlock = 0;
-        this.nextBlock = startBlock;
+        this.nextBlock = 0;
         this.moveTime = startTime;
+        this.waiting = false;
     }
 }
 

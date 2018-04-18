@@ -1,6 +1,6 @@
 class RandomDistribution {
     static randomExponential(rate = 1, startShift = 0) {
-        return (-Math.log(Math.random()) / rate + startShift);
+        return (-Math.log(Math.random()) * (rate - startShift) + startShift);
     }
 
     static randomDUniform(min, max) {
